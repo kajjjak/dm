@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--https://www.mapbox.com/mapbox.js/example/v1.0.0/divicon/-->
+<!-- http://chimera.labs.oreilly.com/books/1234000001654/ch04.html#resizing_an_image_painted_to_the_canvas -->
+<!-- http://gamedevelopment.tutsplus.com/articles/great-full-game-sprite-sheets-from-graphicriver--gamedev-3797   -->
+<!-- http://2dgameartforprogrammers.blogspot.com/2011/12/game-assets.html  -->
+<!-- http://opengameart.org/content/tanks-top-down-ww2 -->
+<html>
+<head>
+<meta charset=utf-8 />
+  <title>Defense map - vehicles</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <!--<link rel="stylesheet" href="stylesheets/actors.css" type="text/css" media="all" />-->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+  <script src="vendor/jsoneditor-min.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="vendor/jsoneditor-min.css">
+  <style>
+    body { 
+        margin:0; 
+        padding:0; 
+        font-size:12px;
+    }
+  </style>
+</head>
+<body>
+    <button onclick="test()">test</button>
+    <div id="dialog-modal-vehicles-editor" style="width: 100%; height: 100%;"></div>
+<!-- scripts starts -->
+<script>
+        var editor = new jsoneditor.JSONEditor(document.getElementById("dialog-modal-vehicles-editor"));
+        editor.set(JSON.parse(localStorage.getItem("vehicles")));
+        
+        function test(){
+          localStorage.setItem("vehicles", JSON.stringify(editor.get()));
+          document.location.href = "index.html";
+        }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+
+.actor_defend_camp1 .body{
+    background-color: rgba(0,200,0,0.2);
+    width:100%;
+    height:100%;
+    border-radius: 100px;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+.actor_enemy_camp1 .body{
+    background-color: rgba(220,0,0,0.2);
+    width:100%;
+    height:100%;
+    border-radius: 100px;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_chopper .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -193px -1px;
+    width: 53px;
+    height: 125px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_chopper .body .rotor{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -254px -3px;
+    width: 97px;
+    height: 97px;
+    margin:auto;
+    position:absolute;
+    top:0px; 
+    bottom:30px; 
+    left:-23px; 
+    right:0px;
+    -webkit-animation-name: rotate; 
+    -webkit-animation-duration: 0.4s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate; 
+    -moz-animation-duration: 0.4s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}    
+.bender{
+    background-color:red;
+    width: 18px;
+    height: 11px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_canon1 .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -37px -1px;
+    width: 19px;
+    height: 45px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_canon2 .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -129px -1px;
+    width: 29px;
+    height: 59px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_truck .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -116px -99px;
+    width: 25px;
+    height: 41px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+ 
+.actor_soldier1 .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  -149px -72px;
+    width: 18px;
+    height: 11px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_soldier2 .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -168px -63px;
+    width: 14px;
+    height: 21px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_tank2 .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -71px -1px;
+    width: 57px;
+    height: 71px; 
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+.actor_tank2 .body .cockpit{
+    margin:auto;
+    position:absolute;
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+ /* mmgr.actors.mytank.rotate(10, {"layer":"cockpit", duration:1000}); */
+.actor_tank2 .body .cockpit .canon{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -129px -1px;
+    width: 29px;
+    height: 59px;
+    margin:auto;
+    position:absolute;
+    top:-20px; /* tranlate the canon itself not the cookpit since it is what we are rotating */ 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.actor_tank1 .body{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png') no-repeat -1px -1px;
+    width: 35px;
+    height: 45px;
+    margin:auto;
+    position:absolute; 
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+
+.label{
+    height: 10px;
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 0 30px 0 30px;
+}
+
+.actor_tank1 .body .cockpit{
+    margin:auto;
+    position:absolute;
+    top:0px; 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+ /* mmgr.actors.mytank.rotate(10, {"layer":"cockpit", duration:1000}); */
+.actor_tank1 .body .cockpit .canon{
+    background: url('http://img96.imageshack.us/img96/7743/topdownsheet1.png')  no-repeat -37px -1px;
+    width: 19px;
+    height: 45px;
+    margin:auto;
+    position:absolute;
+    top:-20px; /* tranlate the canon itself not the cookpit since it is what we are rotating */ 
+    bottom:0px; 
+    left:0px; 
+    right:0px;
+}
+ 
+.map_marker {
+    border:0px solid #000;
+    border-radius: 100px;
+    height:100px;
+    width:100px;
+}
+.map_marker:hover{
+    background-color:rgba(50,50,50,0.2);
+}
+
+.map_bender {
+    border:1px solid #000;
+    background-color:rgba(50,50,50,0.2);
+    border-radius: 100px;
+    height:100px;
+    width:100px;
+}
+.map_bender:hover{
+    background-color:rgba(50,50,50,0.2);
+}

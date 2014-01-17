@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--https://www.mapbox.com/mapbox.js/example/v1.0.0/divicon/-->
+<!-- http://chimera.labs.oreilly.com/books/1234000001654/ch04.html#resizing_an_image_painted_to_the_canvas -->
+<!-- http://gamedevelopment.tutsplus.com/articles/great-full-game-sprite-sheets-from-graphicriver--gamedev-3797   -->
+<!-- http://2dgameartforprogrammers.blogspot.com/2011/12/game-assets.html  -->
+<!-- http://opengameart.org/content/tanks-top-down-ww2 -->
+<html>
+<head>
+<meta charset=utf-8 />
+  <title>Defense map</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.5.2/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.5.2/mapbox.css' rel='stylesheet' />
+ 
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <!--<link rel="stylesheet" href="stylesheets/actors.css" type="text/css" media="all" />-->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+  <script src="vendor/jsoneditor-min.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="vendor/jsoneditor-min.css">
+
+  <script src="vendor/lowlag/lowLag.js" type="text/javascript" charset="utf-8"></script>
+  <script src="vendor/lowlag/sm2/js/soundmanager2-jsmin.js" type="text/javascript" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="stylesheets/actors.css">
+  
+  <script src="scripts/QTransform.js" type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/mglutils.js" type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/mgl.js" type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/actors.js" type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/game.js" type="text/javascript" charset="utf-8"></script>
+  <style>
+    body { 
+        margin:0; 
+        padding:0; 
+        font-size:12px;
+    }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<!-- toolbar starts -->
+<div id='legend-content' style='display: none;'>
+  <div id='player-money'></div>
+  <button id='attack-list'>Contract on friends</button><br>
+  <button id='bounty-list'>Bounties on your head</button><br>
+  <button id='map-zoom-attack'>View attackers</button><br>
+  <button id='map-zoom-defend'>View defenders</button><br>
+  <button id='game-edit'>Edit</button><br>
+  <button id='game-cash'>More cash</button><br>
+  <style type='text/css'>
+    
+  </style>
+</div>
+<!-- dialog starts -->
+<div id="dialog-modal-bounty" title="Bounties on your head">
+  <p>List of attacks on you</p>
+  <div id="dialog-modal-bounty-list">Loading ...</div>
+</div>
+<div id="dialog-modal-attack" title="Most Wanted">
+  <p>List of attacks you can take on</p>
+  <div id="dialog-modal-attack-list">Loading ...</div>
+</div>
+<div id="dialog-modal-contract" title="Contract">
+  <div id="dialog-modal-contract-content">Loading ...</div>
+</div>
+
+<div id="dialog-modal-vehicles" title="Vehicles">
+  <div id="dialog-modal-vehicles-content">
+    <div id="dialog-modal-vehicles-editor" style="width: 100%; height: 380px;"></div>
+  </div>
+</div>
+
+<!-- scripts starts -->
+<script>
+
+    mmgr = new SceneManager();
+    mmgr.init(L.mapbox.map('map', 'examples.map-9ijuk24y').setView([64.1353379999, -21.895210], 19));    
+    amgr.init();
+    amgr.requestAction("load_scene");
+
+</script>
+</body>
+</html>

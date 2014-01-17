@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-  <title>Defense map - vehicles</title>
+  <title>Defense map - settings</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <!--<link rel="stylesheet" href="stylesheets/actors.css" type="text/css" media="all" />-->
@@ -27,20 +27,20 @@
 <body>
     <button onclick="test()">test</button>
     <button onclick="save()">save</button>
-    <div id="dialog-modal-vehicles-editor" style="width: 100%; height: 100%;"></div>
+    <div id="dialog-modal-settings-editor" style="width: 100%; height: 100%;"></div>
 <!-- scripts starts -->
 <script>
-        var editor = new jsoneditor.JSONEditor(document.getElementById("dialog-modal-vehicles-editor"));
-        editor.set(JSON.parse(localStorage.getItem("vehicles")));
+        var editor = new jsoneditor.JSONEditor(document.getElementById("dialog-modal-settings-editor"));
+        editor.set(JSON.parse(localStorage.getItem("settings")));
         
         function test(){
-          localStorage.setItem("vehicles", JSON.stringify(editor.get()));
+          localStorage.setItem("settings", JSON.stringify(editor.get()));
           document.location.href = "index.html";
         }
 
         function save(){
           var data = JSON.stringify(editor.get());
-          localStorage.setItem("vehicles", data);
+          localStorage.setItem("settings", data);
           copyToClipboard(data);
         }
 

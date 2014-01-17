@@ -166,7 +166,7 @@ function addEnemyBountyHunter(bounty, wave_index, hunter_index){
 function getEnemyCount (){ return $('[id^="enemy_actor_"]').length; }
 
 function initSettings (){
-    var settings_string = startValues(); //localStorage.getItem("settings") || startValues();
+    var settings_string = localStorage.getItem("settings") || startValues();
     window.settings = JSON.parse(settings_string);
 }
 
@@ -441,7 +441,7 @@ function game_render(){
     };
         
     this.game_moremoney = function(param){
-        globalGame("money", 10);
+        globalGame("money", settings.economy.pack1);
     };
         
     this.contract_locate_source = function(param){

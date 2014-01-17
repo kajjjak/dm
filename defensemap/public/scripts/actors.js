@@ -214,7 +214,7 @@ function startValues (){
     };
     s = {
         vehicles:v,
-        economy:{budget:10}
+        economy:{budget:10, pack1:20}
     };
     var strs = JSON.stringify(s);
     localStorage.setItem('settings', strs);

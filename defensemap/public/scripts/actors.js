@@ -126,6 +126,24 @@ function startValues (){
         placement_duration: 1000, placement_sound: null, placement_sound_complete: null,
         transition_speed  : 100}
     };  
+    v['attacker_soldier2'] = {
+        base_class : 'actor_soldier2',
+        
+        type : 'attacker',
+        range_detection : 30,
+        properties:{
+            actor_type : 'soldier',
+         damage_now : 0,
+         damage_max : 4,
+        weapon_damage : 1, weapon_sound : 'gunshot1',
+         price_placing : 10, price_corpse : 2, price_building : 2, price_reperation : 2,
+        price_removing : 0,
+        rotation_offset : 0,
+        rotation_transition : true,
+        rotation_speed : 500,
+        placement_duration: 1000, placement_sound: null, placement_sound_complete: null,
+        transition_speed  : 100}
+    };      
     v['attacker_truck'] = {
         base_class : 'actor_soldier1',
         type : 'attacker',
@@ -161,7 +179,7 @@ function startValues (){
         transition_speed  : 100}
     };          
     v['actor_defend_camp1'] = {
-        base_class : 'actor_camp1',
+        base_class : 'actor_defend_camp1',
         type : 'defender',
         range_detection : 30,
         properties:{
@@ -178,7 +196,7 @@ function startValues (){
         transition_speed  : 100}
     };        
     v['actor_enemy_camp1'] = {
-        base_class : 'actor_camp1',
+        base_class : 'actor_enemy_camp1',
         type : 'attacker',
         range_detection : 30,
         properties:{

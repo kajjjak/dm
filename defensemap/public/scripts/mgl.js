@@ -42,11 +42,18 @@ function MapActor(id, options){
 }; 
 
 MapActor.prototype.destroy = function(){
-    mmgr.map.removeLayer(this.marker);  
+    /* only called by game mechanics */
+    if(this.callback_destroyed){this.callback_destroyed(this);}
+    this.remove();
+};
+
+MapActor.prototype.remove = function(){
+    /* can be called by game mechanics but always called by game engine when removing actor */
+    mmgr.map.removeLayer(this.marker);
     if(mmgr.actors[this.id]){
         delete mmgr.actors[this.id];
     }
-    if(this.callback_destroyed){this.callback_destroyed(this);}
+    if(this.callback_removed){this.callback_removed(this);}
 };
 
 MapActor.prototype.setPopup = function(html_content, options){
@@ -254,6 +261,7 @@ function SceneManager(){
     this.simulating = false;
     this.map = null;
     this.actors = {};
+    this.paths = {};
     this._tick_fps = {fps:30, interval:1000/30};
     
     this.init = function(map){
@@ -289,6 +297,19 @@ function SceneManager(){
         }
         return this.actors[id];
     };
+
+    this.removeActor = function(id){
+        var a;
+        if (id){
+            a = this.actors[id];
+            if (a){a.remove();}
+        }else{
+            for (var i in this.actors){
+                a = this.actors[i];
+                a.remove();
+            }
+        }
+    }
     
     this.createPath = function(id, path, options){
         //path should be a array with objects {latlng:{lat:x, lng:y}, ...}
@@ -301,7 +322,24 @@ function SceneManager(){
         var polyline_options = {
             color: '#000'
         };
-        L.polyline(line_points, polyline_options).addTo(this.map);
+        var path = L.polyline(line_points, polyline_options);
+        path.addTo(this.map);
+        this.paths[id] = path;
+    };
+
+    this.removePath = function(id){
+        var p;
+        if(id){
+            p = this.paths[id];
+            if (p){
+                this.map.removeLayer(p);
+            }
+        }else{
+            for (var i in this.paths){
+                p = this.paths[i];
+                this.map.removeLayer(p);
+            }            
+        }
     };
     
     this.setLegend = function(options, callback_success){

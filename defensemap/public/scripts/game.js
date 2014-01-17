@@ -33,7 +33,7 @@ function globalGame(state, amount){
         setTimeout(function(){updateDefenseVehicleMenu();}, 10);
     }
     if(state == "camps"){
-        document.game_state.player_camps = [{id:"defend_base_camp", position:[64.137184,-21.854356], actor:"actor_defend_camp1", type:"defender", infowindow:"base camp"}];
+        document.game_state.player_camps = [{id:"defend_base_camp", position:[64.137184,-21.854356], actor:"actor_defend_camp1", type:"defender", infowindow:"base camp"}, {id:"defend_base_camp_2", position:[64.133184,-21.824356], actor:"actor_defend_camp1", type:"defender", infowindow:"secondary base camp"}];
         return document.game_state.player_camps;
     }
     $("#player-money").html("$" + document.game_state.money);
@@ -42,7 +42,13 @@ function globalGame(state, amount){
 function getAnyDefenseBaseCamp(){
     return mmgr.actors["defend_base_camp"];
 }
-
+function hideBender(){
+    var bender = mmgr.actors["bender"];
+    if(bender){
+        bender.marker.closePopup();
+    }
+    bender.translate({lat:99999999999,lng:99999999999});
+}
 function toggleBender(options){
     var bender = mmgr.actors["bender"];
     if(!bender){
@@ -104,7 +110,14 @@ function routeFetch(latlng1, latlng2){
 }
 
 function showMessage(msg, timeout){
-    console.info(msg, timeout);
+    $("#label_message").html(msg);
+    setTimeout(function(){
+        $("#label_message").html("");
+    }, timeout);
+}
+
+function setGameStatusMessage (msg){
+    $("#label_status").html(msg);
 }
 
 function getBountyList(){
@@ -116,7 +129,16 @@ function getBountyList(){
         [{actor:"attacker_chopper", delay:1000}],
         [{message:"Darnnit here is next wave in", delay:1000}, {actor:"attacker_chopper", delay:3000}, {actor:"attacker_tank2", delay:3000}]
     ];
-    return [bounty1];
+    var bounty2 = {"hunter":{"name":"NSA"}, "reward": 1000, "cost": 100, "distance":100};
+    bounty2.target = [64.1371,-21.854272];
+    bounty2.source = [64.133407,-21.853879];
+    bounty2.route = [{"latlng":{"lat":64.133407,"lng":-21.853879}},{"latlng":{"lat":64.133445,"lng":-21.853918}},{"latlng":{"lat":64.136177,"lng":-21.856685}},{"latlng":{"lat":64.136177,"lng":-21.856685}},{"latlng":{"lat":64.136375,"lng":-21.855171}},{"latlng":{"lat":64.136543,"lng":-21.853712}},{"latlng":{"lat":64.136543,"lng":-21.853712}},{"latlng":{"lat":64.1371,"lng":-21.854272}}];
+    bounty2.waves = [
+        [{message:"I will get you now", delay:1000}, {actor:"attacker_soldier1", delay:3000}, {actor:"attacker_soldier2", delay:3000}, {actor:"attacker_truck", delay:3000}, {actor:"attacker_tank1", delay:3000}, {actor:"attacker_tank2", delay:3000}, {actor:"attacker_chopper", delay:3000}],
+        [{message:"I will get you now", delay:1000}, {actor:"attacker_soldier1", delay:200}, {actor:"attacker_soldier2", delay:100},{actor:"attacker_soldier1", delay:300}, {actor:"attacker_soldier2", delay:3000},{actor:"attacker_soldier1", delay:3000}, {actor:"attacker_soldier2", delay:3000}]
+
+    ];
+    return [bounty1, bounty2];
 }
 
 function getMostWantedList(){
@@ -275,15 +297,19 @@ function game_render(){
                 globalGame("money", prop.price_corpse);
             }
         };
+        actor.callback_removed = function(){
+        };
         actor.callback_destroyed = function(actor){
             var prop = actor.getGameProperty();
             if (prop.actor_type == "defend_camp"){
-                console.info("YOU LOOOOSE GAME OVER");
+                setGameStatusMessage("YOU LOOOOSE GAME OVER");
                 return;
             }
-            if(getEnemyCount() == 0){ //start next wave
-                amgr.requestAction("next_wave", {wave_index:amgr.render.wave_index + 1});
-            }
+            setTimeout(function(){
+                if(getEnemyCount() == 0){ //start next wave
+                    amgr.requestAction("next_wave", {wave_index:amgr.render.wave_index + 1});
+                }                
+            }, 1000);
         }
     };
     
@@ -299,6 +325,7 @@ function game_render(){
         }
         var vehicle_settings = settings.vehicles[param.actor].properties;
         globalGame("money", vehicle_settings.price_placing*(-1));
+        hideBender();
         setTimeout(function(){
             amgr.requestAction("create_defend_actor", param);
             smgr.play(vehicle_settings.placement_sound_complete);
@@ -410,11 +437,11 @@ function game_render(){
     };
 
     this.game_editor = function(param){
-        document.location.href="editor.html";        
+        document.location.href="editor.html";
     };
         
     this.game_moremoney = function(param){
-        globalGame("money", 100);
+        globalGame("money", 10);
     };
         
     this.contract_locate_source = function(param){
@@ -454,12 +481,13 @@ function game_render(){
     };
     
     this.next_wave = function(param){
+        console.info(param);
         param.bounty = param.bounty || getBountyList()[window.bounty_index];
         if (param.wave_index >= param.bounty.waves.length){
-            if (getEnemyCount() == 0){
+            if (getEnemyCount() === 0){
                 setTimeout(function(){ //need this timeout since I loosing game is called first then this is called
                     if (getAnyDefenseBaseCamp()){
-                        showMessage("YOU WON THE GAME!!");
+                        setGameStatusMessage("WON THE GAME!!");
                     }
                 }, 1000);
             }
@@ -509,9 +537,11 @@ function game_render(){
         for (var i in player_camps){
             amgr.requestAction("create_actor", player_camps[i]);
         }
+        /*
         setTimeout(function(){
             amgr.requestAction("load_bounty", {bounty:0});
         }, 1000);
+        */
     };
 
     this.display_toolbar = function(param){

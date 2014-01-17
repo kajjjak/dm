@@ -68,8 +68,6 @@ app.get('/auth/facebook', function(req, res) {
   }, function (err, facebookRes) {
     res.redirect('/UserHasLoggedIn');
   });
-
-
 });
 
 

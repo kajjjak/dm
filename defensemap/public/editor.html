@@ -26,6 +26,7 @@
 </head>
 <body>
     <button onclick="test()">test</button>
+    <button onclick="save()">save</button>
     <div id="dialog-modal-vehicles-editor" style="width: 100%; height: 100%;"></div>
 <!-- scripts starts -->
 <script>
@@ -35,6 +36,16 @@
         function test(){
           localStorage.setItem("vehicles", JSON.stringify(editor.get()));
           document.location.href = "index.html";
+        }
+
+        function save(){
+          var data = JSON.stringify(editor.get());
+          localStorage.setItem("vehicles", data);
+          copyToClipboard(data);
+        }
+
+        function copyToClipboard(text) {
+          window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
         }
 
 </script>
